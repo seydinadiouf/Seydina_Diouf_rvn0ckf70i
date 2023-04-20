@@ -33,18 +33,18 @@ public class StudentController {
     }
 
 
-    @ApiOperation(value = "Get a student by his id")
+    @ApiOperation(value = "Get a student by filters")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 400, message = "Request sent by the client was syntactically incorrect"),
             @ApiResponse(code = 404, message = "Resource access does not exist"),
             @ApiResponse(code = 500, message = "Internal server error during request processing")})
     @GetMapping
-    public Page<StudentDTO> getStudentByFilter(@RequestParam String schoolClassName, @RequestParam String teacherName, Pageable pageable) {
+    public Page<StudentDTO> getStudentByFilter(@RequestParam(required = false) String schoolClassName, @RequestParam(required = false) String teacherName, Pageable pageable) {
         return studentService.getStudentByFilters(schoolClassName, teacherName, pageable);
     }
 
-    @ApiOperation(value = "Get students using filter")
+    @ApiOperation(value = "Get students by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 400, message = "Request sent by the client was syntactically incorrect"),
