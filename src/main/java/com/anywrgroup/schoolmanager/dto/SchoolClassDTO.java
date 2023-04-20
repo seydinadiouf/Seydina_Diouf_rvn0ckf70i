@@ -1,6 +1,7 @@
 package com.anywrgroup.schoolmanager.dto;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SchoolClassDTO {
@@ -12,7 +13,7 @@ public class SchoolClassDTO {
 
     private TeacherDTO teacher;
 
-    private List<StudentDTO> students;
+    private List<StudentDTO> students = new ArrayList<>();
 
     public Long getSchoolClassId() {
         return schoolClassId;
