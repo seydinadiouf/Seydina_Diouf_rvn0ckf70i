@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/classes")
 public class SchoolClassController {
@@ -25,7 +27,7 @@ public class SchoolClassController {
             @ApiResponse(code = 400, message = "Request sent by the client was syntactically incorrect"),
             @ApiResponse(code = 500, message = "Internal server error during request processing")})
     @PostMapping
-    public ResponseEntity<SchoolClassDTO> createSchoolClass(@RequestBody SchoolClassDTO schoolClassDTO) {
+    public ResponseEntity<SchoolClassDTO> createSchoolClass(@RequestBody @Valid SchoolClassDTO schoolClassDTO) {
         SchoolClassDTO createdSchoolClass = schoolClassService.createSchoolClass(schoolClassDTO);
         return new ResponseEntity<>(createdSchoolClass, HttpStatus.CREATED);
     }

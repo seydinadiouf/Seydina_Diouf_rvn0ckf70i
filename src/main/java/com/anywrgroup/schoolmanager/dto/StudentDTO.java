@@ -1,6 +1,7 @@
 package com.anywrgroup.schoolmanager.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class StudentDTO {
     private Long studentId;
@@ -8,6 +9,7 @@ public class StudentDTO {
     @NotBlank
     private String studentName;
 
+    @NotNull
     private Long schoolClassId;
 
     public Long getStudentId() {
