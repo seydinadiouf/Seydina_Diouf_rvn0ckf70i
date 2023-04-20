@@ -1,8 +1,6 @@
 package com.anywrgroup.schoolmanager.service.impl;
 
-import com.anywrgroup.schoolmanager.dto.SchoolClassDTO;
 import com.anywrgroup.schoolmanager.dto.StudentDTO;
-import com.anywrgroup.schoolmanager.entity.SchoolClass;
 import com.anywrgroup.schoolmanager.entity.Student;
 import com.anywrgroup.schoolmanager.exceptions.ResourceNotFoundException;
 import com.anywrgroup.schoolmanager.mapper.StudentMapper;
@@ -14,8 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 @Service
@@ -47,36 +44,4 @@ public class StudentServiceImpl implements StudentService {
     public Page<StudentDTO> getStudentByFilters(String schoolClassName, String teacherName, Pageable pageable) {
         return studentRepository.findAllByFilter(StringUtils.lowerCase(schoolClassName), StringUtils.lowerCase(teacherName), pageable).map(studentMapper::toDto);
     }
-/*
-    @Override
-    public SchoolClassDTO addStudentToSchoolClass(Long studentId, Long schoolClassId) {
-        Student student = studentRepository.findById(studentId).orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format(STUDENT_NOT_FOUND_MESSAGE, studentId)));
-
-        SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId).orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format(SCHOOL_CLASS_NOT_FOUND_MESSAGE, schoolClassId )));
-
-        *//* Save class *//*
-        addStudentToSchoolClass(student, schoolClass);
-
-        *//* Save school class *//*
-        SchoolClass schoolClassSaved = schoolClassRepository.save(schoolClass);
-
-        student.setSchoolClass(schoolClassSaved);
-
-        studentRepository.save(student);
-
-        return schoolClassMapper.toDto(schoolClassSaved);
-    }
-
-    private void addStudentToSchoolClass(Student student, SchoolClass schoolClass){
-        *//*Get current students*//*
-        List<Student> currentStudents = schoolClass.getStudents();
-
-        *//* Adding the new student *//*
-        currentStudents.add(student);
-
-        *//* Updating school class *//*
-        schoolClass.setStudents(currentStudents.stream().distinct().collect(Collectors.toList()));
-
-    }*/
-
 }
